@@ -1,0 +1,6 @@
+{
+  "max_price": 50000,
+  "min_year": 2015,
+  "allowed_brands": ["Audi", "BMW", "Skoda"],
+  "max_mileage": 150000
+}
