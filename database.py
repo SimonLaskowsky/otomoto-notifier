@@ -50,3 +50,12 @@ def get_last_offer_time():
     result = c.fetchone()[0]
     conn.close()
     return result if result else datetime.min
+
+def is_database_empty():
+    """Sprawdza czy baza danych jest pusta"""
+    conn = sqlite3.connect('offers.db')
+    c = conn.cursor()
+    c.execute("SELECT COUNT(*) FROM offers")
+    count = c.fetchone()[0]
+    conn.close()
+    return count == 0
