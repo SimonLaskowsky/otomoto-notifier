@@ -1,15 +1,24 @@
-def is_good_deal(car, config):
-    """Sprawdza ofertę względem konfiguracji"""
-    basic_checks = [
-        car["price"] <= config["max_price"],
-        car["year"] >= config["min_year"]
-    ]
+def generate_search_url(params):
+    """Generuje URL Otomoto na podstawie parametrów"""
+    base_url = "https://www.otomoto.pl/osobowe"
     
-    if config["allowed_brands"]:
-        brand = car["title"].split()[0]
-        basic_checks.append(brand in config["allowed_brands"])
+    if params.get('brand'):
+        base_url += f"/{params['brand'].lower()}"
+        if params.get('model'):
+            base_url += f"/{params['model'].lower()}"
     
-    if config["max_mileage"] is not None:
-        basic_checks.append(car.get("mileage", 0) <= config["max_mileage"])
+    query_params = []
     
-    return all(basic_checks)
+    if params.get('price_max'):
+        query_params.append(f"search[filter_float_price:to]={params['price_max']}")
+    
+    if params.get('year_from'):
+        query_params.append(f"search[filter_float_year:from]={params['year_from']}")
+    
+    if params.get('mileage_max'):
+        query_params.append(f"search[filter_float_mileage:to]={params['mileage_max']}")
+    
+    # Sortowanie od najnowszych
+    query_params.append("search[order]=created_at:desc")
+    
+    return f"{base_url}?{'&'.join(query_params)}" if query_params else base_url

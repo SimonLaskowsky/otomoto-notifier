@@ -1,6 +1,8 @@
 {
-  "max_price": 50000,
-  "min_year": 2015,
-  "allowed_brands": ["Audi", "BMW", "Skoda"],
-  "max_mileage": 150000
+  "brand": "Audi",
+  "model": "A6",
+  "max_price": 150000,
+  "min_year": 2018,
+  "max_mileage": 100000,
+  "check_interval_minutes": 30
 }

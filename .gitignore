@@ -1,3 +1,4 @@
-#.gitignore
-config.py
+*.db
+config.json
+.env
 __pycache__/
